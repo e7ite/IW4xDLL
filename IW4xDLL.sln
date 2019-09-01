@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.779
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IW4xDLL", "IW4xDLL\IW4xDLL.vcxproj", "{06E99451-1DC5-4EBD-95EF-8AE47DE9D947}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{06E99451-1DC5-4EBD-95EF-8AE47DE9D947}.Debug|x64.ActiveCfg = Debug|x64
+		{06E99451-1DC5-4EBD-95EF-8AE47DE9D947}.Debug|x64.Build.0 = Debug|x64
+		{06E99451-1DC5-4EBD-95EF-8AE47DE9D947}.Debug|x86.ActiveCfg = Debug|Win32
+		{06E99451-1DC5-4EBD-95EF-8AE47DE9D947}.Debug|x86.Build.0 = Debug|Win32
+		{06E99451-1DC5-4EBD-95EF-8AE47DE9D947}.Release|x64.ActiveCfg = Release|x64
+		{06E99451-1DC5-4EBD-95EF-8AE47DE9D947}.Release|x64.Build.0 = Release|x64
+		{06E99451-1DC5-4EBD-95EF-8AE47DE9D947}.Release|x86.ActiveCfg = Release|Win32
+		{06E99451-1DC5-4EBD-95EF-8AE47DE9D947}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2E293987-49F1-401F-B6F9-976F2CE9791F}
+	EndGlobalSection
+EndGlobal
