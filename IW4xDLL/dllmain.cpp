@@ -11,18 +11,18 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     {
     case DLL_PROCESS_ATTACH:
         FILE* file;
-		AllocConsole(); 
-		SetConsoleTitle("IW4xDLL");
-		freopen_s(&file, "CONOUT$", "w", stdout);
-		
+        AllocConsole(); 
+        SetConsoleTitle("IW4xDLL");
+        freopen_s(&file, "CONOUT$", "w", stdout);
+        
         InsertDetour(&GameData::Com_PrintMessage, 
             GameData::Com_PrintMessageDetour);
         InsertDetour(&GameData::Menu_PaintAll, GameData::Menu_PaintAllDetour);
         InsertDetour(&GameData::CG_DrawNightVisionOverlay,
             GameData::CG_DrawNightVisionOverlayDetour);
         break;
-	case DLL_PROCESS_DETACH:
-		FreeConsole();
+    case DLL_PROCESS_DETACH:
+        FreeConsole();
 
         std::vector<QWORD>::iterator it = detours.begin();
         while (it != detours.end())
@@ -30,7 +30,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
             RemoveDetour(*it);
             it = detours.erase(it);
         }
-		break;
+        break;
     }
     return TRUE;
 }

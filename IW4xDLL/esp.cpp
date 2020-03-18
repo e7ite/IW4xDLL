@@ -11,11 +11,11 @@ void DrawBorderBox(float head[2], float foot[2], const float *color)
     GameData::ScreenPlacement* scrPlace = GameData::ScrPlace_GetActivePlacement(0);
     
     GameData::CG_DrawRotatedPicPhysical(scrPlace,
-        x, y, boxWidth, 1, 0, color, material); //top
+        x, y, boxWidth, 1, 0, color, material); 
     GameData::CG_DrawRotatedPicPhysical(scrPlace,
-        x, foot[1], boxWidth, 1, 0, color, material); //bottom
+        x, foot[1], boxWidth, 1, 0, color, material);
     GameData::CG_DrawRotatedPicPhysical(scrPlace,
-        x, y, 1, boxHeight, 0, color, material); //left
+        x, y, 1, boxHeight, 0, color, material);
     GameData::CG_DrawRotatedPicPhysical(scrPlace,
-        foot[0] + boxWidth / 2, y, 1, boxHeight, 0, color, material); //right
+        foot[0] + boxWidth / 2, y, 1, boxHeight, 0, color, material);
 }

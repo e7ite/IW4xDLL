@@ -54,18 +54,18 @@ namespace GameData
 
     struct clientInfo_t
     {
-        int  infoValid;							        // 0x000
-        int  nextValid;							        // 0x004
-        int  clientNum;							        // 0x008
-        char name[0x10];						        // 0x00C
-        int  team;								        // 0x01C
-        int  oldteam;							        // 0x020
-        int  ffaTeam;							        // 0x024
-        char pad00[0x18];						        // 0x028
-        char model[0x40];						        // 0x040
-        char attachModelNames[6][0x40];			        // 0x080
-        char attachTagNames[6][0x40];			        // 0x200
-        char pad01[0x1AC];						        // 0x380
+        int  infoValid;                                 // 0x000
+        int  nextValid;                                 // 0x004
+        int  clientNum;                                 // 0x008
+        char name[0x10];                                // 0x00C
+        int  team;                                      // 0x01C
+        int  oldteam;                                   // 0x020
+        int  ffaTeam;                                   // 0x024
+        char pad00[0x18];                               // 0x028
+        char model[0x40];                               // 0x040
+        char attachModelNames[6][0x40];                 // 0x080
+        char attachTagNames[6][0x40];                   // 0x200
+        char pad01[0x1AC];                              // 0x380
     }; //Size = 0x52C
 
     struct clientState_s
@@ -85,21 +85,21 @@ namespace GameData
 
     struct cg_s
     {
-        int          serverTime;		                // 0x00000
-        char         pad00[0x334C]; 					// 0x00004
+        int          serverTime;                        // 0x00000
+        char         pad00[0x334C];                     // 0x00004
         int          clientNum;                         // 0x03350
         char         pad01[0x1C];                       // 0x03354
         snapshot_s*  snap;                              // 0x03370
         snapshot_s*  nextSnap;                          // 0x03374
         char         pad02[0x673E0];                    // 0x03378        
-        int          time;				    		    // 0x6A758
+        int          time;                              // 0x6A758
         char         pad03[0x1C];                       // 0x6A75C
-        refdef_s     refdef;						    // 0x6A778
-        float        refdefViewAngles;					// 0x6E708
+        refdef_s     refdef;                            // 0x6A778
+        float        refdefViewAngles;                  // 0x6E708
         char         pad04[0x48F8];                     // 0x6E70C
-        int          weaponSelect;						// 0x73004
+        int          weaponSelect;                      // 0x73004
         char         pad05[0x83830];                    // 0x73008
-        clientInfo_t clients[0x12];				        // 0xF6838
+        clientInfo_t clients[0x12];                     // 0xF6838
     };
 
     struct playerState_s
@@ -116,7 +116,7 @@ namespace GameData
 
     struct cpose_t
     {
-        unsigned short lightingHandle;					// 0x00
+        unsigned short lightingHandle;                  // 0x00
         char           eType;                           // 0x02
         char           eTypeUnion;                      // 0x03
         char           pad00[0x14];                     // 0x04
@@ -133,7 +133,7 @@ namespace GameData
 
     struct usercmd_s
     {
-        int  serverTime;							    // 0x00
+        int  serverTime;                                // 0x00
         char pad00[0x24];                               // 0x04
     }; // Size = 0x28
 
