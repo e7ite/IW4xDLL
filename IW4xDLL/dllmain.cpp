@@ -15,11 +15,10 @@ BOOL APIENTRY DllMain( HMODULE hModule,
         SetConsoleTitle("IW4xDLL");
         freopen_s(&file, "CONOUT$", "w", stdout);
         
-        InsertDetour(&GameData::Com_PrintMessage, 
-            GameData::Com_PrintMessageDetour);
         InsertDetour(&GameData::Menu_PaintAll, GameData::Menu_PaintAllDetour);
         InsertDetour(&GameData::CG_DrawNightVisionOverlay,
             GameData::CG_DrawNightVisionOverlayDetour);
+        InsertDetour(&GameData::CL_WritePacket, GameData::CL_WritePacketDetour);
         break;
     case DLL_PROCESS_DETACH:
         FreeConsole();

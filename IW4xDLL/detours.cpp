@@ -1,37 +1,31 @@
 #include "stdafx.h"
 #include "detours.h"
-#include "aimbot.h"
-#include "esp.h"
 
 namespace GameData
 {
     void(__cdecl* CG_DrawNightVisionOverlay)(int localClientNum)
         = (void(__cdecl*)(int))CG_DrawNightVisionOverlay_a;
-    void(__cdecl* Com_PrintMessage)(int channel, const char* msg, int error)
-        = (void(__cdecl*)(int, const char*, int))Com_PrintMessage_a;
     void(__cdecl* Menu_PaintAll)(UiContext* dc)
         = (void(__cdecl*)(UiContext*))Menu_PaintAll_a;
+    void(__cdecl* CL_WritePacket)(int localClientNum) 
+        = (void(__cdecl*)(int))CL_WritePacket_a;
 
     void CG_DrawNightVisionOverlayDetour(int localClientNum)
     {
-        int target = Aimbot::GetTarget();
+        Aimbot& aimbot = Aimbot::GetInstance();
+
+        int target = aimbot.SetTarget(aimbot.FindTarget());
         if (target != -1)
         {
-            float out[3];
-
+            vec3_t out;
             AimTarget_GetTagPos(*(WORD*)0x1AA2E04, &cg_entitiesArray[target], out);
-            out[0] -= cgameGlob->refdef.vieworg[0];
-            out[1] -= cgameGlob->refdef.vieworg[1];
-            out[2] -= cgameGlob->refdef.vieworg[2];
+            aimbot.SetAngles(out);
+            
+            vectoangles(out - cgameGlob->refdef.vieworg, out);
+            out -= clientActive->delta_angles;
 
-            vectoangles(out, out);
-            out[0] -= clientActive->delta_angles[0];
-            out[1] -= clientActive->delta_angles[1];
-            out[2] -= clientActive->delta_angles[2];
-
-            clientActive->viewangles[0] = out[0];
-            clientActive->viewangles[1] = out[1];
-            clientActive->viewangles[2] = out[2];
+            aimbot.SetAngles(out);
+            //*(vec3_t*)clientActive->viewangles = out;
         }
 
         for (int i = 0; i < 18; i++)
@@ -40,20 +34,17 @@ namespace GameData
             {
                 float headOrigin[3];
                 float headScreen[2], feetScreen[2];
-                unsigned bone = GameData::SL_FindString("j_head", 0);
-                GameData::AimTarget_GetTagPos(bone,
-                    &GameData::cg_entitiesArray[i],
-                    headOrigin);
-                GameData::CG_WorldPosToScreenPosReal(0,
-                    GameData::ScrPlace_GetActivePlacement(0), headOrigin, headScreen);
-                    
-                GameData::CG_WorldPosToScreenPosReal(0,
-                    GameData::ScrPlace_GetActivePlacement(0),
-                    GameData::cg_entitiesArray[i].pose.origin,
+                unsigned bone = SL_FindString("j_head", 0);
+                ScreenPlacement* scrPlace = ScrPlace_GetActivePlacement(0);
+
+                AimTarget_GetTagPos(bone, &cg_entitiesArray[i], headOrigin);
+
+                CG_WorldPosToScreenPosReal(0, scrPlace, headOrigin, headScreen);
+                CG_WorldPosToScreenPosReal(0, scrPlace, cg_entitiesArray[i].pose.origin,
                         feetScreen);
 
                 DrawBorderBox(headScreen, feetScreen, 
-                    AimTarget_IsTargetVisible(0, bone, &GameData::cg_entitiesArray[i])
+                    AimTarget_IsTargetVisible(0, bone, &cg_entitiesArray[i])
                         ? Color(255, 0, 0) : Color(0, 0, 255));
             }
         }
@@ -61,14 +52,36 @@ namespace GameData
         CG_DrawNightVisionOverlay(localClientNum);
     }
 
-    void Com_PrintMessageDetour(int channel, const char* msg, int error)
-    {
-        Com_PrintMessage(channel, msg, error);
-    }
-
     void Menu_PaintAllDetour(UiContext* dc)
     {
         Menu_PaintAll(dc);
+    }
+
+    void CL_WritePacketDetour(int localClientNum)
+    {
+        Aimbot& aimbot = Aimbot::GetInstance();
+        usercmd_s* ocmd = &clientActive->cmds[clientActive->cmdNumber - 1 & 0x7F];
+        usercmd_s* ccmd = &clientActive->cmds[clientActive->cmdNumber & 0x7F];
+
+        *ocmd = *ccmd;
+        ocmd->serverTime--;
+
+        int target = aimbot.GetTarget();
+        vec3_t targetAngles = aimbot.GetAngles();
+        float oldAngle = ocmd->angles[1];
+        if (target != -1)
+        {
+            for (int i = 0; i < 2; i++)
+                ocmd->angles[i]
+                    = (int)(targetAngles[i]
+                        * 182.0444488525391f + 0.5f - 0.4999999990686774f) & 0xFFFF;
+            ocmd->button_bits |= 1;
+            ccmd->button_bits &= ~1;
+        }
+
+        // aimbot.FixMovement(ocmd, )
+        
+        CL_WritePacket(localClientNum);
     }
 }
 
