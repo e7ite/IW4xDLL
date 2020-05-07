@@ -96,8 +96,8 @@ namespace GameData
         char         pad03[0x3088];                     // 0x002C8
         int          clientNum;                         // 0x03350
         char         pad04[0x1C];                       // 0x03354
-        snapshot_s*  snap;                              // 0x03370
-        snapshot_s*  nextSnap;                          // 0x03374
+        snapshot_s  *snap;                              // 0x03370
+        snapshot_s  *nextSnap;                          // 0x03374
         char         pad05[0x673E0];                    // 0x03378        
         int          time;                              // 0x6A758
         char         pad06[0x1C];                       // 0x6A75C
@@ -168,12 +168,12 @@ namespace GameData
 
     struct WeaponVariantDef
     {
-        const char* szInternalName;                     // 0x0000
+        const char *szInternalName;                     // 0x0000
     };
 
     struct WeaponDef
     {
-        const char* szOverlayName;                      // 0x0000
+        const char *szOverlayName;                      // 0x0000
     };
 
     struct hudelem_s
@@ -185,47 +185,47 @@ namespace GameData
     }; // Size = 0xA8
 
     // Game structures
-    extern cg_s*           cgameGlob;
-    extern centity_s*      cg_entitiesArray;
-    extern clientActive_t* clientActive;
-    extern HWND*           hwnd;
+    extern cg_s           *cgameGlob;
+    extern centity_s      *cg_entitiesArray;
+    extern clientActive_t *clientActive;
+    extern HWND           *hwnd;
 
     // Math functions
-    extern void(__cdecl* vectoangles)(const float* vec, float* angles);
-    extern float(__cdecl* Vec3DistanceSq)(const float* p1, const float* p2);
-    extern bool(__cdecl* CG_WorldPosToScreenPosReal)(int localClientNum,
-        ScreenPlacement* scrPlace, const float* worldPos, float *out);
-    extern void(__cdecl* AngleVectors)(const float* angles, float* forward,
-        float* right, float* up);
-    extern float(__cdecl* __libm_sse2_sin)(float x);
-    extern float(__cdecl* __libm_sse2_cos)(float x);
-    extern float(__cdecl* __libm_sse2_tan)(float x);
+    extern void(__cdecl *vectoangles)(const float *vec, float *angles);
+    extern float(__cdecl *Vec3DistanceSq)(const float *p1, const float *p2);
+    extern bool(__cdecl *CG_WorldPosToScreenPosReal)(int localClientNum,
+        ScreenPlacement *scrPlace, const float *worldPos, float *out);
+    extern void(__cdecl *AngleVectors)(const float *angles, float *forward,
+        float *right, float *up);
+    extern float(__cdecl *__libm_sse2_sin)(float x);
+    extern float(__cdecl *__libm_sse2_cos)(float x);
+    extern float(__cdecl *__libm_sse2_tan)(float x);
 
     // Shader functions
-    extern void*(__cdecl* Material_RegisterHandle)(const char* name, int imageTrack);
-    extern void(__cdecl* CG_DrawRotatedPicPhysical)(ScreenPlacement* scrPlace, float x,
-        float y, float width, float height, float angle, const float* color, void* material);
-    extern ScreenPlacement*(__cdecl* ScrPlace_GetActivePlacement)(int localClientNum);
+    extern void*(__cdecl *Material_RegisterHandle)(const char *name, int imageTrack);
+    extern void(__cdecl *CG_DrawRotatedPicPhysical)(ScreenPlacement *scrPlace, float x,
+        float y, float width, float height, float angle, const float *color, void *material);
+    extern ScreenPlacement*(__cdecl *ScrPlace_GetActivePlacement)(int localClientNum);
     
     // Weapon functions
-    extern WeaponVariantDef*(__cdecl* BG_GetWeaponVariantDef)(int weaponIndex);
-    extern WeaponDef*(__cdecl* BG_GetWeaponDef)(int weaponIndex);
+    extern WeaponVariantDef*(__cdecl *BG_GetWeaponVariantDef)(int weaponIndex);
+    extern WeaponDef*(__cdecl *BG_GetWeaponDef)(int weaponIndex);
     
     // Miscellaneous functions
-    extern int(__cdecl* SL_FindString)(const char* str, int inst);
-    extern char*(__cdecl* va)(const char* fmt, ...);
-    extern char(__cdecl* ClampChar)(signed int i);
+    extern int(__cdecl *SL_FindString)(const char *str, int inst);
+    extern char*(__cdecl *va)(const char *fmt, ...);
+    extern char(__cdecl *ClampChar)(signed int i);
 
     // Concurrency functions
-    extern void(__stdcall* InitializeCriticalSection)(LPCRITICAL_SECTION lpCriticalSection);
-    extern void(__stdcall* EnterCriticalSection)(LPCRITICAL_SECTION lpCriticalSection);
-    extern void(__stdcall* LeaveCriticalSection)(LPCRITICAL_SECTION lpCriticalSection);
+    extern void(__stdcall *InitializeCriticalSection)(LPCRITICAL_SECTION lpCriticalSection);
+    extern void(__stdcall *EnterCriticalSection)(LPCRITICAL_SECTION lpCriticalSection);
+    extern void(__stdcall *LeaveCriticalSection)(LPCRITICAL_SECTION lpCriticalSection);
     
-    void AimTarget_GetTagPos(unsigned int tagname, centity_s* cent, float* pos);
-    void CG_BulletEndpos(int randSeed, const float spread, const float* start,
-        float* end, float* dir, const float* forwardDir, const float* rightDir,
-        const float* upDir, const float maxRange);
-    bool AimTarget_IsTargetVisible(int localClientNum, int tagName, centity_s* cent);
+    void AimTarget_GetTagPos(unsigned int tagname, centity_s *cent, float *pos);
+    void CG_BulletEndpos(int randSeed, const float spread, const float *start,
+        float *end, float *dir, const float *forwardDir, const float *rightDir,
+        const float *upDir, const float maxRange);
+    bool AimTarget_IsTargetVisible(int localClientNum, int tagName, centity_s *cent);
 
     enum FuncAddresses
     {
@@ -291,7 +291,7 @@ struct vec3_t
 struct Font
 {
     int index;
-    const char* dir;
+    const char *dir;
 };
 
 struct Color

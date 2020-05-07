@@ -49,7 +49,7 @@ int Aimbot::FindTarget()
 
     for (int i = 0; i < 18; i++)
     {
-        GameData::centity_s* cent = &GameData::cg_entitiesArray[i];
+        GameData::centity_s *cent = &GameData::cg_entitiesArray[i];
 
         if (i != GameData::cgameGlob->clientNum
             && cent->pose.eType

@@ -20,7 +20,7 @@ void WriteBytes(DWORD addr, const char *bytes, size_t len)
     FlushInstructionCache(curProcess, (void*)addr, len);
 }
 
-void ReadBytes(DWORD addr, char* buf, size_t len)
+void ReadBytes(DWORD addr, char *buf, size_t len)
 {
     DWORD curProtection;
     VirtualProtect((LPVOID)addr, len, PAGE_EXECUTE_READWRITE, &curProtection);

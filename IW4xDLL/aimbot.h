@@ -19,6 +19,6 @@ public:
     void SetAngles(const vec3_t& angles);
     int SetTarget(int target);
     float DegreesToRadians(float degrees);
-    void FixMovement(GameData::usercmd_s* cmd, float currentAngle, float oldAngle,
+    void FixMovement(GameData::usercmd_s *cmd, float currentAngle, float oldAngle,
         float oldForwardmove, float oldRightmove);
 };

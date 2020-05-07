@@ -7,8 +7,8 @@ void DrawBorderBox(float head[2], float foot[2], const float *color)
     float boxWidth = boxHeight / 2.2f;
     float x = (foot[0] - (boxWidth / 2));
     float y = foot[1] - boxHeight;
-    void* material = GameData::Material_RegisterHandle("white", 0);
-    GameData::ScreenPlacement* scrPlace = GameData::ScrPlace_GetActivePlacement(0);
+    void *material = GameData::Material_RegisterHandle("white", 0);
+    GameData::ScreenPlacement *scrPlace = GameData::ScrPlace_GetActivePlacement(0);
     
     GameData::CG_DrawRotatedPicPhysical(scrPlace,
         x, y, boxWidth, 1, 0, color, material); 

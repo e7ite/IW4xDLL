@@ -10,7 +10,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     switch (ul_reason_for_call)
     {
     case DLL_PROCESS_ATTACH:
-        FILE* file;
+        FILE *file;
         AllocConsole(); 
         SetConsoleTitle("IW4xDLL");
         freopen_s(&file, "CONOUT$", "w", stdout);

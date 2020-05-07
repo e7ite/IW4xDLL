@@ -3,11 +3,11 @@
 
 namespace GameData
 {
-    void(__cdecl* CG_DrawNightVisionOverlay)(int localClientNum)
+    void(__cdecl *CG_DrawNightVisionOverlay)(int localClientNum)
         = (void(__cdecl*)(int))CG_DrawNightVisionOverlay_a;
-    void(__cdecl* Menu_PaintAll)(UiContext* dc)
+    void(__cdecl *Menu_PaintAll)(UiContext *dc)
         = (void(__cdecl*)(UiContext*))Menu_PaintAll_a;
-    void(__cdecl* CL_WritePacket)(int localClientNum) 
+    void(__cdecl *CL_WritePacket)(int localClientNum) 
         = (void(__cdecl*)(int))CL_WritePacket_a;
 
     void CG_DrawNightVisionOverlayDetour(int localClientNum)
@@ -35,7 +35,7 @@ namespace GameData
                 float headOrigin[3];
                 float headScreen[2], feetScreen[2];
                 unsigned bone = SL_FindString("j_head", 0);
-                ScreenPlacement* scrPlace = ScrPlace_GetActivePlacement(0);
+                ScreenPlacement *scrPlace = ScrPlace_GetActivePlacement(0);
 
                 AimTarget_GetTagPos(bone, &cg_entitiesArray[i], headOrigin);
 
@@ -52,7 +52,7 @@ namespace GameData
         CG_DrawNightVisionOverlay(localClientNum);
     }
 
-    void Menu_PaintAllDetour(UiContext* dc)
+    void Menu_PaintAllDetour(UiContext *dc)
     {
         Menu_PaintAll(dc);
     }
@@ -60,8 +60,8 @@ namespace GameData
     void CL_WritePacketDetour(int localClientNum)
     {
         Aimbot& aimbot = Aimbot::GetInstance();
-        usercmd_s* ocmd = &clientActive->cmds[clientActive->cmdNumber - 1 & 0x7F];
-        usercmd_s* ccmd = &clientActive->cmds[clientActive->cmdNumber & 0x7F];
+        usercmd_s *ocmd = &clientActive->cmds[clientActive->cmdNumber - 1 & 0x7F];
+        usercmd_s *ccmd = &clientActive->cmds[clientActive->cmdNumber & 0x7F];
 
         *ocmd = *ccmd;
         ocmd->serverTime--;
@@ -75,6 +75,7 @@ namespace GameData
                 ocmd->angles[i]
                     = (int)(targetAngles[i]
                         * 182.0444488525391f + 0.5f - 0.4999999990686774f) & 0xFFFF;
+
             ocmd->button_bits |= 1;
             ccmd->button_bits &= ~1;
         }

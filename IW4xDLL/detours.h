@@ -14,12 +14,12 @@ namespace GameData
         CL_WritePacket_a                            = 0x411900,
     };
 
-    extern void(__cdecl* CG_DrawNightVisionOverlay)(int localClientNum);
-    extern void(__cdecl* Menu_PaintAll)(UiContext* dc);
-    extern void(__cdecl* CL_WritePacket)(int localClientNum);
+    extern void(__cdecl *CG_DrawNightVisionOverlay)(int localClientNum);
+    extern void(__cdecl *Menu_PaintAll)(UiContext *dc);
+    extern void(__cdecl *CL_WritePacket)(int localClientNum);
 
     void CG_DrawNightVisionOverlayDetour(int localClientNum);
-    void Menu_PaintAllDetour(UiContext* dc);
+    void Menu_PaintAllDetour(UiContext *dc);
     void CL_WritePacketDetour(int localClientNum);
 }
 
